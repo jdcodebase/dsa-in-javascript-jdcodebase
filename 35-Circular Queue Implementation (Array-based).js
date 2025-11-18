@@ -12,16 +12,17 @@ class CircularQueue {
 
   isFull() {
     return (
-      (this.front === 0 && this.rear === this.size - 1) ||
-      this.front === this.rear + 1
+      this.front === this.rear + 1 ||
+      (this.rear === this.size - 1 && this.front === 0)
     );
   }
 
   enqueue(element) {
     if (this.isFull()) {
-      console.log("Queue Underflow");
+      console.log("Queue Overflow");
       return;
     }
+
     if (this.front === -1) {
       this.front = 0;
     }
@@ -32,7 +33,6 @@ class CircularQueue {
 
     console.log(`${element} inserted`);
   }
-
   dequeue() {
     if (this.isEmpty()) {
       console.log("Queue Underflow");
@@ -47,13 +47,12 @@ class CircularQueue {
       this.front = (this.front + 1) % this.size;
     }
 
-    console.log(`${element} remeoved`);
+    console.log(`${element} removed`);
   }
 
   display() {
-    console.log("display");
     if (this.isEmpty()) {
-      console.log("Queue is Empty");
+      console.log(`Queue is Empty`);
       return;
     }
 
@@ -80,12 +79,12 @@ cq.enqueue(10);
 cq.enqueue(20);
 cq.enqueue(30);
 cq.enqueue(40);
+console.log(cq);
 cq.display();
 
 cq.dequeue();
 cq.dequeue();
 cq.enqueue(50);
 cq.enqueue(60);
-cq.enqueue(70);
-cq.enqueue(80);
+console.log(cq);
 cq.display();
